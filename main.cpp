@@ -86,12 +86,8 @@ int main(int argc, char ** argv)
   // Program output requirements for P1:
   // 1) optimal 2-medians solution value
   // 2) cardinality of cluster containing the smallest value
-  //
-  // Print both without labels, one per line:
-  std::cout << sol.totalCost << std::endl;
-  std::cout << sol.k << std::endl;
-
-
+  std::cout << "Optimal 2-medians solution value: " << sol.totalCost << std::endl;
+  std::cout << "Cardinality of low cluster: " << sol.k << std::endl;
 
   // cleanup the buffer I allocated
   delete[] numbers;

@@ -1,36 +1,59 @@
-## pseudocode
-```pseudo
-TWO-MEDIANS(X)
+TWO-MEDIANS-FAST(X)
     if length(X) < 2
         error "need at least two numbers"
+
     sort X in ascending order
-    bestCost = infinity
-    bestK = 1
     n = length(X)
 
-    for k = 1 to n - 1	// try each possible split
-        mL = floor((1 + k) / 2)
-        medL = X[mL]	// left median
-        mH = floor((k + 1 + n) / 2)
-        medH = X[mH]	// right median
+    # build prefix sums
+    prefix[0] = X[0]
+    for i = 1 to n - 1
+        prefix[i] = prefix[i - 1] + X[i]
 
-        costL = 0
-        for i = 1 to k	// total distance to left median
-            costL = costL + abs(X[i] - medL)
+    bestCost = infinity
+    bestK = 1
 
-        costH = 0
-        for i = k + 1 to n	// total distance to right median
-            costH = costH + abs(X[i] - medH)
+    # helper to compute L1 cost of segment [L..R]
+    SEGMENT-COST(L, R):
+        m = floor((L + R) / 2)
+        med = X[m]
 
-        total = costL + costH
+        if L == 0
+            sumLeft = prefix[m]
+        else
+            sumLeft = prefix[m] - prefix[L - 1]
+
+        sumRight = prefix[R] - prefix[m]
+
+        leftCount  = m - L + 1
+        rightCount = R - m
+
+        costLeft  = leftCount * med - sumLeft
+        costRight = sumRight - rightCount * med
+
+        return costLeft + costRight
+
+    # try each possible split
+    for k = 1 to n - 1
+        costL = SEGMENT-COST(0, k - 1)
+        costR = SEGMENT-COST(k, n - 1)
+        total = costL + costR
+
         if total < bestCost or (total == bestCost and k < bestK)
             bestCost = total
             bestK = k
 
-    return bestK
-```
+    # bestCost is the optimal 2-medians solution value
+    # bestK is the size of the cluster containing the smallest value
 
-## Complexity:
-Time: sort O(n log n) + cost loops O(n^2) = O(n^2)
-Space: O(n) (store input + sorted copy)
+Time complexity:
+    Sorting takes O(n log n).
+    Building prefix sums is O(n).
+    The loop over k runs O(n) times and each SEGMENT-COST call is O(1),
+    so that part is O(n).
+    Overall time: O(n log n).
+
+Space complexity:
+    We store the array X and a prefix array of length n.
+    Extra space: O(n).
 

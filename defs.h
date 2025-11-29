@@ -19,7 +19,7 @@
 #include "timer.h"
 
 const bool VERBOSE = 0; // set to '1' for a lot of output to screen, '0' otherwise
-const bool QUIET = 1;   // set to '1' to minimize output to screen, '0' otherwise
+const bool QUIET = 0;   // set to '1' to minimize output to screen, '0' otherwise
 
 const int STRING_LENGTH = 100; // number of chars allocated for each string
 const bool LOG_FILE = 0;       // set to 1 to print out logfile

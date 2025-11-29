@@ -1,3 +1,5 @@
+##pseudocode
+```pseudo
 TWO-MEDIANS-FAST(X)
     if length(X) < 2
         error "need at least two numbers"
@@ -45,6 +47,7 @@ TWO-MEDIANS-FAST(X)
 
     # bestCost is the optimal 2-medians solution value
     # bestK is the size of the cluster containing the smallest value
+```
 
 Time complexity:
     Sorting takes O(n log n).

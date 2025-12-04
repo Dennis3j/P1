@@ -109,7 +109,7 @@ TwoMediansSolution computeTwoMediansSolution(float* numbers, int n) {
     return result;
 }
 
-// This just calls the TwoMediansSolution function from the main.cpp 
+// This just calls the computeLowClusterCardinality function from the main.cpp 
 int computeLowClusterCardinality(float* numbers, int n) {
     TwoMediansSolution sol = computeTwoMediansSolution(numbers, n);
     return sol.k; // just return the cluster size that contains the smallest value

@@ -34,8 +34,7 @@ int main(int argc, char ** argv)
       std::cout << argv[i] << " ";
     std::cout << "\n\n";
     std::cout << "Input will be read from '" << inputFileName << "'.\n";
-   // std::cout << "Numbers will be optimally clustered using 2-medians.\n";
-   // std::cout << "Cardinality of the cluster containing the smallest value will be output to screen.\n" << std::endl;
+
    std::cout << "Numbers will be optimally clustered using 2-medians.\n";
    std::cout << "Program will output the optimal 2-medians solution value,\n";
    std::cout << "followed by the cardinality of the cluster containing the smallest value.\n\n";
@@ -74,12 +73,12 @@ int main(int argc, char ** argv)
     std::cout << "\n\n";
   }
   
-  //Changed from what I had in P0 to logic that works for P1
-  // enumerate every possible clustering arrangement (contiguous cut) via my helper
   // guard: need at least 2 values to form 2 clusters
   if (numCount < 2)
     fatal("Not enough data (need at least 2 values).");
 
+  //Call the functuion that gives me the full 2-medians solution
+  //this is going to return the best cost, the medians, and k
   // compute full optimal 2-medians solution (O(n log n))
   TwoMediansSolution sol = computeTwoMediansSolution(numbers, numCount);
 

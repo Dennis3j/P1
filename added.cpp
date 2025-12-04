@@ -2,15 +2,18 @@
 #include "added.h"
 #include <algorithm>
 #include <vector>
-#include <limits>
+#include <limits> //we are using this to get infinity for bestCost tracking
 
-// Helper: compute L1 cost of segment [L..R] in sorted xs, using prefix sums.
-// xs is sorted; prefix[i] = xs[0] + ... + xs[i].
+//Computes the cost of a peice of array from L to R using prefix sums 
+// In P0, we used loop through all the numbers evry time which made it slow
+// Now we are using prefix array so we can the sums immedeatly without looping
+// It is using the prefix sums to compute the L1 cost (sum of |x - median|) for a sorted segment [L..R]
+// in O(1) time instead of looping through all the elements.
 static double segmentCost(
-    const std::vector<float>& xs,
-    const std::vector<double>& prefix,
-    int L, int R,
-    double& outMedian
+    const std::vector<float>& xs, //sorted values that we are working with 
+    const std::vector<double>& prefix, //prefixes the sums of xs so we can get ranges fast
+    int L, int R, // the left and the right indicies of the segmant
+    double& outMedian //
 ) {
     int m = (L + R) / 2;      // median index
     double med = xs[m];
